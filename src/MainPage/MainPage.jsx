@@ -3,7 +3,7 @@ import React from 'react'
 const MainPage = () => {
     return (
         <div>
-            안녕 반가워!
+            Main 페이지입니다
         </div>
     )
 }

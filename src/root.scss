@@ -1,0 +1,11 @@
+:root{
+    --color-body-background: #f9f3f3;
+    --color-list-background :#F7D9D9;
+    --color-text :rgb(242, 82, 135);
+
+    --radius-list : 18px;
+    
+}
+body{
+    background-color: var(--color-body-background) !important;
+}

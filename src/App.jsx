@@ -3,6 +3,8 @@ import {Route} from "react-router-dom";
 import {ConnectedRouter} from 'connected-react-router'
 import {history} from '../redux/configureStore'
 import MainPage from './MainPage/MainPage'
+import QuizPage from './QuizPage/QuizPage';
+import ResultPage from './ResultPage/ResultPage';
 import './root.scss';
 
 const App = () => {
@@ -10,6 +12,8 @@ const App = () => {
     <>
         <ConnectedRouter history={history}>	
             <Route exact path="/" component={MainPage}/>
+            <Route path="/quiz" component={QuizPage}/>
+            <Route path="/quizresult" component={ResultPage}/>
         </ConnectedRouter>    
     </>
     )
