@@ -1,9 +1,12 @@
 import React from 'react'
-
-const QuizPage = () => {
+import './QuizPage.scss'
+import Quiz from './Component/Quiz'
+import Choice from'./Component/Choice'
+const QuizPage = ({history}) => {
     return (
-        <div>
-            quiz 페이지입니다
+        <div className="container">
+            <Quiz history={history}/>
+            <Choice history={history}/>
         </div>
     )
 }

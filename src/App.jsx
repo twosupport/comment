@@ -12,8 +12,8 @@ const App = () => {
     <>
         <ConnectedRouter history={history}>	
             <Route exact path="/" component={MainPage}/>
-            <Route path="/quiz" component={QuizPage}/>
-            <Route path="/quizresult" component={ResultPage}/>
+            <Route exact path="/quiz" component={QuizPage} />
+            <Route path="/quiz/result" component={ResultPage}/>
         </ConnectedRouter>    
     </>
     )
