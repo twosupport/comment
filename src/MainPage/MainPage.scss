@@ -1,0 +1,175 @@
+.container{
+ 
+  width:100vw;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font);
+  font-size: 30px;
+  margin-top: 20px;
+  font-weight: bold; /* 페이지의 모든 글이 bold이면 이렇게 한곳에 처리합니다.*/
+  .h1 {   /* container 안에 h1이 있다면 이렇게 Nesting 해줍시다*/
+    display: block;
+    font-size: 5em;
+    margin:0px; /* 이렇게 하나의 속성으로 묶을 수 있습니다.*/
+    // margin-block-start: 0em;
+    // margin-block-end: 0em;
+    // margin-inline-start: 0px;
+    // margin-inline-end: 0px;
+    // font-weight: bold;
+  }
+}
+/* 만약 Scss파일 안에 수백개의 클래스를 스타일링을 해주는 코드가 있다면 너무 복잡하지 않나요?*/
+/* 그래서 Nesting을 통해 똑같은 부분들을 한곳으로 정리하는 작업이 필요하답니다.*/
+/* 그래야 내가 어떤 부분에 어떤 요소의 스타일링을 할 때 바로 찾아갈 수 있게 됩니다.*/
+/* Nesting은 취업자 개발 필수 개념 때 배운 함수의 추상화와 리팩토링과 같다고 보시면 됩니다.*/
+.polaroid_list{ 
+  width:80%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(400px, 1fr));
+  grid-gap:20px;
+
+  .polaroid_outer {
+      background: #fff;
+      padding: 1rem;
+      box-shadow: 0 0.2rem 1.2rem rgba(0,0,0,0.2);
+      // display: flex;
+
+    img { /* polaroid_outer 안에 img가 있다면 이렇게 Nesting 해줍시다*/
+      max-width: 100%;
+      position: relative;
+      // height: auto;  이 속성은 필요없어 보입니다
+    }
+    
+    .polaroid_inner {
+      background: #fff;
+      padding: 1rem;
+      box-shadow: 0 0.2rem 1.2rem rgba(0,0,0,0.2);
+    }
+  }
+
+  .polaroid_caption {
+    font-size: 4rem;
+    text-align: center;
+    line-height: 2em;
+    // font-weight: bold;
+  }
+}
+
+@media screen and (max-width: 1090px){
+    .polaroid_list{
+        grid-template-columns: 1fr;
+        width:100%;
+    }
+}
+.polaroid_outer .polaroid_inner:before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  transition: all 0.35s;
+  height: 20%;
+  width: 40%;
+  bottom: 30px;
+  right: 12px;
+  box-shadow: 0 2.1rem 2rem rgba(0,0,0,0.4);
+}
+// 혹시 nth-of-type 작업하실때 너무 번거롭다고 생각하지 않으셨나요?
+// 보통 이런 반복되는 수작업에는 css,js 공식문서를 보면 효과적으로 
+// 코딩할 수 있게 많은 기능을 지원하고 있습니다.
+// nth-of-type 홀수번에는 5deg를 짝수번에는 -5deg로 설정하는 규칙이 있다면
+// odd, even 속성을 통해 반복되는 작업을 크게 줄일 수 있습니다
+// nth-of-type 공식 문서 : https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-of-type
+.polaroid_outer:nth-of-type(odd) {
+  transform: scale(0.8, 0.8) rotate(5deg);
+  transition: all 0.35s;
+}
+
+.polaroid_outer:nth-of-type(even) {
+  transform: scale(0.8, 0.8) rotate(-5deg);
+  transition: all 0.35s;
+}
+
+.polaroid_outer:nth-of-type(odd) .polaroid_inner:before {
+  transform: rotate(6deg);
+}
+.polaroid_outer:nth-of-type(even) .polaroid_inner:before {
+  transform: rotate(-6deg);
+}
+
+.polaroid_outer:hover {
+  filter: none;
+  transform: scale(1, 1) rotate(0deg) !important;
+  transition: all 0.35s;
+}
+
+.polaroid_outer:hover .polaroid_inner:before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  transform: rotate(0deg);
+  height: 80%;
+  width: 80%;
+  bottom: 0%;
+  right: 4%;
+  box-shadow: 0 1rem 3rem rgba(0,0,0,0.2);
+  transition: all 0.35s;
+}
+// 어떤가요? 이 밑은 그렇게 힘들게 작성했던 현아님의 코드들이 Nesting이나 odd,even 속성 덕분에 
+// 무의미해진 코드들입니다. 코드는 더욱 간결화되어지고 개발시간 또한 줄어들어보이지 않을까요?
+// 사실 제가 정리한 코드보다도 더욱 이쁘고 간결화된 클린 코드는 얼마든지 작성할 수 있습니다.
+// 다만 저도 이제 제가 할 일을 해야해서 여기까지만 하겠습니다. 긴 글 읽어주셔서 감사합니다.
+// 주석 처리된 것들은 이해하셨다면 지워주세요. 
+
+// .polaroid_outer:nth-of-type(4n+1) {
+//   transform: scale(0.8, 0.8) rotate(5deg);
+//   transition: all 0.35s;
+ 
+// }
+// .polaroid_outer:nth-of-type(4n+1) .polaroid_inner:before {
+  // transform: rotate(6deg);
+  // height: 20%;
+  // width: 40%;
+  // bottom: 30px;
+  // right: 12px;
+  // box-shadow: 0 2.1rem 2rem rgba(0,0,0,0.4);
+// }
+
+// .polaroid_outer:nth-of-type(4n+2) {
+//   transform: scale(0.8, 0.8) rotate(-5deg);
+//   transition: all 0.35s;
+// }
+// .polaroid_outer:nth-of-type(4n+2) .polaroid_inner:before {
+  // transform: rotate(-6deg);
+  // height: 20%;
+  // width: 40%;
+  // bottom: 30px;
+  // left: 12px;
+  // box-shadow: 0 2.1rem 2rem rgba(0,0,0,0.4);
+// }
+
+// .polaroid_outer:nth-of-type(4n+4) {
+//   transform: scale(0.8, 0.8) rotate(3deg);
+//   transition: all 0.35s;
+// }
+// .polaroid_outer:nth-of-type(4n+4) .polaroid_inner:before {
+  // transform: rotate(4deg);
+  // height: 20%;
+  // width: 40%;
+  // bottom: 30px;
+  // right: 12px;
+  // box-shadow: 0 2.1rem 2rem rgba(0,0,0,0.3);
+// }
+
+// .polaroid_outer:nth-of-type(4n+3) {
+//   transform: scale(0.8, 0.8) rotate(-3deg);
+//   transition: all 0.35s;
+// }
+// .polaroid_outer:nth-of-type(4n+3) .polaroid_inner:before {
+  // transform: rotate(-4deg);
+  // height: 20%;
+  // width: 40%;
+  // bottom: 30px;
+  // left: 12px;
+  // box-shadow: 0 2.1rem 2rem rgba(0,0,0,0.3);
+// }
+

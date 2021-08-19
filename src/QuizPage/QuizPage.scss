@@ -1,3 +1,4 @@
+// ----- public -----
 @import url('https://fonts.googleapis.com/css2?family=Cute+Font&display=swap');
 .container{
     width:100vw;
@@ -8,8 +9,15 @@
     font-family: var(--font);
     font-size: 30px;
     margin-top: 20px;
+    animation: fadein;
+    animation-duration: .5s;
 }
-
+@keyframes fadein {     /* 수정해야 할 부분*/
+    0% {
+      opacity: 0; }
+    100% {
+      opacity: 1; } }
+    
 // ----- Quiz  -----
 .Quiz_border{
     text-align: center;
@@ -32,7 +40,7 @@
 
     li {
     margin: 10px;
-    padding:20px;
+    padding:25px;
     text-align: center;
     display: block;
     list-style: none;
@@ -43,4 +51,5 @@
         background-color: var(--color-text);
     }
     }
+    
 }
